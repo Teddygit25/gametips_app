@@ -1,0 +1,71 @@
+package com.example.gametips.ui.screens
+
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.Divider
+import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.dp
+import com.example.gametips.R
+import com.example.gametips.ui.components.CategoryCardWithOverlay
+import com.example.gametips.ui.components.FontFamilyLobster
+
+
+@Composable
+fun CategoriesPage(){
+
+
+//    val Lobster = FontFamily(Font(R.font.lobster_regular , FontWeight.Normal))
+
+    Column (modifier = Modifier.verticalScroll(rememberScrollState())){
+
+        FontFamilyLobster(text = "Get Good")
+
+        Spacer(modifier = Modifier.height(8.dp))
+
+        HorizontalDivider(color = Color.White.copy(alpha = 0.5f)  , thickness = 1.dp , modifier = Modifier.fillMaxWidth())
+
+        Spacer(modifier = Modifier.height(5.dp))
+
+        Column {
+            CategoryCardWithOverlay(
+                categoryTitle = "RACING" ,
+                aboutText = "Get all racing game tips from Nfs to Blur " ,
+                imageUrl = R.drawable.racing)
+            CategoryCardWithOverlay(
+                categoryTitle = "SPORTS" ,
+                aboutText = "Develop a perfect tackling skill in the field or even outmanoeuvre opponents" ,
+                imageUrl = R.drawable.sports)
+            CategoryCardWithOverlay(
+                categoryTitle = "FIGHTING" ,
+                aboutText = "Struggling to learn combos, we got you covered in a variety of your favorite games" ,
+                imageUrl = R.drawable.mk)
+             CategoryCardWithOverlay(
+                categoryTitle = "SHOOTERS" ,
+                aboutText = "Wanna learn how pros move and aim in combat , you're in the right place" ,
+                imageUrl = R.drawable.shooters)
+             CategoryCardWithOverlay(
+                categoryTitle = "RPGs" ,
+                aboutText = "Lost in the vast world of elden ring , not to worry we've put down a full guide to it" ,
+                imageUrl = R.drawable.rpg)
+
+
+
+        }
+
+
+    }
+}
