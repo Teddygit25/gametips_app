@@ -15,11 +15,14 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.example.gametips.R
 import com.example.gametips.ui.components.CustomBottomNavBar
+import com.example.gametips.ui.components.Screen
 import com.example.gametips.ui.data.models.BottomNavBar
 
 
@@ -29,7 +32,7 @@ fun MainScreen(){
 
     val bottomNavItems = listOf(
         BottomNavBar("home" , Icons.Default.Home ) ,
-        BottomNavBar("Get good" , iconCustom = painterResource(R.drawable.category) ) ,
+        BottomNavBar(Screen.GetGood.route , iconCustom = painterResource(R.drawable.category) ) ,
         BottomNavBar("News" , Icons.Default.Place ) ,
     )
 
@@ -45,8 +48,17 @@ fun MainScreen(){
             modifier = Modifier.padding(paddingValues)
         ) {
             composable("home") { HomePage(innerPadding = paddingValues) }
-            composable("Get good") { CategoriesPage() }
+            composable(Screen.GetGood.route) { CategoriesPage(navController) }
             composable("News") { CoachesPage() }
+
+            // NEW: GameList screen with category argument
+            composable(
+                  Screen.GameList.route,
+                arguments = listOf(navArgument("category") { type = NavType.StringType })
+            ) { backStackEntry ->
+                val category = backStackEntry.arguments?.getString("category") ?: ""
+                GameListPage(category = category , navController)
+            }
 
         }
     }

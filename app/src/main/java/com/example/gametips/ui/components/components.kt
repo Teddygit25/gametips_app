@@ -3,6 +3,7 @@ package com.example.gametips.ui.components
 import androidx.compose.animation.slideInHorizontally
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -14,9 +15,14 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Star
 import androidx.compose.material.icons.outlined.Search
+import androidx.compose.material.icons.outlined.Star
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
@@ -40,6 +46,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.example.gametips.R
+import com.example.gametips.ui.data.models.Coach
+import com.example.gametips.ui.data.models.Game
+import com.example.gametips.ui.data.models.GameCategoryNav
 
 
 @Composable
@@ -51,7 +60,7 @@ fun IconTextCard(
     Card(
         elevation = CardDefaults.cardElevation(
             defaultElevation = 12.dp) ,
-        modifier = Modifier.padding(vertical = 10.dp , horizontal = 5.dp)
+        modifier = Modifier.padding(vertical = 6.dp , horizontal = 5.dp)
             .clip(RoundedCornerShape(30.dp))
     ) {
         Row(
@@ -178,14 +187,14 @@ fun BottomFeatureCard(image : Int , title : String , aboutText : String , added 
 
 @Composable
 fun CategoryCardWithOverlay(
-    categoryTitle: String,
-    aboutText: String,
-    imageUrl: Int,
+   category: GameCategoryNav ,
+   onClick:() -> Unit ,
     modifier: Modifier = Modifier
 ) {
     Box(
         modifier = modifier
             .height(200.dp)
+            .clickable(onClick = onClick)
             .fillMaxWidth()
             .padding(8.dp)
             .clip(RoundedCornerShape(16.dp))
@@ -193,7 +202,7 @@ fun CategoryCardWithOverlay(
     ) {
         // Background Image
         AsyncImage(
-            model = imageUrl,
+            model = category.imageUrl,
             contentDescription = null,
             modifier = Modifier
                 .matchParentSize()
@@ -225,14 +234,14 @@ fun CategoryCardWithOverlay(
 
         ) {
             Text(
-                text = categoryTitle,
+                text = category.name,
                 fontSize = 32.sp ,
                 color = Color.White,
                 style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold)
             )
             Spacer(modifier = Modifier.height(4.dp))
             Text(
-                text = aboutText,
+                text = category.aboutText,
                 color = Color.White.copy(alpha = 0.5f),
                 style = MaterialTheme.typography.bodyMedium,
                 maxLines = 2,
@@ -249,7 +258,7 @@ fun FontFamilyLobster(text : String){
     val Lobster = FontFamily(Font(R.font.lobster_regular , FontWeight.Normal))
 
     Text(
-        text = "Get Good" ,
+        text = text ,
         fontFamily = Lobster ,
         fontSize = 36.sp,
         textAlign = TextAlign.Center ,
@@ -259,4 +268,137 @@ fun FontFamilyLobster(text : String){
     )
 
 }
+
+@Composable
+fun GameCard(
+    game: Game ,
+    modifier: Modifier = Modifier
+) {
+    Box(
+        modifier = modifier
+            .height(270.dp)
+            .width(180.dp)
+            .padding(8.dp)
+            .clip(RoundedCornerShape(16.dp))
+    ) {
+        // Background Image
+        AsyncImage(
+            model = game.imageRes,
+            contentDescription = null,
+            modifier = Modifier
+                .matchParentSize()
+                .clip(RoundedCornerShape(16.dp)),
+            contentScale = ContentScale.Crop
+        )
+
+        // Dark overlay for readability
+        Box(
+            modifier = Modifier
+                .matchParentSize()
+                .background(
+                    Brush.verticalGradient(
+                        colors = listOf(Color(0x80000000), Color(0xCC000000)),
+                        startY = 0f,
+                        endY = Float.POSITIVE_INFINITY
+                    )
+                )
+        )
+
+        // Text content
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .align(Alignment.BottomCenter)
+                .padding(16.dp) ,
+            horizontalAlignment = Alignment.CenterHorizontally ,
+            verticalArrangement = Arrangement.Bottom
+
+        ) {
+            Text(
+                text = game.name,
+                color = Color.White,
+                style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold)
+            )
+        }
+    }
+}
+
+
+@Composable
+fun CoachCard(coach: Coach ,onHireClick: () -> Unit) {
+    Card(
+        modifier = Modifier
+            .padding(8.dp)
+            .width(180.dp)
+            .height(240.dp),
+        shape = RoundedCornerShape(16.dp),
+        elevation = CardDefaults.cardElevation(6.dp)
+    ) {
+        Box(modifier = Modifier.fillMaxSize()) {
+            // Background Image
+            AsyncImage(
+                model = coach.imageRes,
+                contentDescription = null,
+                modifier = Modifier.fillMaxSize(),
+                contentScale = ContentScale.Crop
+            )
+
+            // Gradient overlay at bottom
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .align(Alignment.BottomCenter)
+                    .background(
+                        brush = Brush.verticalGradient(
+                            colors = listOf(Color.Transparent, Color.Black.copy(alpha = 0.7f))
+                        )
+                    )
+            ) {
+                Column(
+                    modifier = Modifier
+                        .padding(8.dp)
+                        .align(Alignment.BottomStart)
+                ) {
+                    Text(coach.name, color = Color.White, fontWeight = FontWeight.Bold)
+                    Text(coach.game, color = Color.White, style = MaterialTheme.typography.bodySmall)
+                    Text(coach.price, color = Color.White, style = MaterialTheme.typography.bodySmall)
+
+                    // ⭐ Ratings
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        repeat(coach.rating) {
+                            Icon(
+                                imageVector = Icons.Default.Star,
+                                contentDescription = "Star",
+                                tint = Color.Yellow,
+                                modifier = Modifier.size(14.dp)
+                            )
+                        }
+                        if (coach.rating < 5) {
+                            repeat(5 - coach.rating) {
+                                Icon(
+                                    imageVector = Icons.Outlined.Star,
+                                    contentDescription = "Empty Star",
+                                    tint = Color.LightGray,
+                                    modifier = Modifier.size(14.dp)
+                                )
+                            }
+                        }
+                    }
+
+                }
+
+                Button(
+                    onClick = onHireClick,
+                    modifier = Modifier
+                        .align(Alignment.BottomEnd)
+                        .padding(8.dp),
+                    colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.onPrimary.copy(alpha = 0.8f))
+                ) {
+                    Text("Hire", color = Color.Black)
+                }
+            }
+        }
+    }
+}
+
 
