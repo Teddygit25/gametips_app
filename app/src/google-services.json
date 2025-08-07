@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "901850357408",
+    "project_id": "game-tips-be03c",
+    "storage_bucket": "game-tips-be03c.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:901850357408:android:c9b0e1e20794ee458fb3c5",
+        "android_client_info": {
+          "package_name": "com.Teddy.gametips"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDzB4ZpKxRy9ySdLqrO8R899awT3b1VGQk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
