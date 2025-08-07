@@ -1,26 +1,52 @@
 [versions]
 accompanistSystemuicontroller = "0.36.0"
 agp = "8.11.1"
+bom = "3.2.2"
 coilSvg = "2.7.0"
+core = "1.2.0"
 coreSplashscreen = "1.0.1"
+firebaseBom = "34.0.0"
+firebaseBomVersion = "32.7.2"
 kotlin = "2.0.21"
 coreKtx = "1.16.0"
 junit = "4.13.2"
 junitVersion = "1.2.1"
 espressoCore = "3.6.1"
+ktorBom = "3.2.3"
+ktorClientAndroid = "3.2.3"
+ktorClientAndroidVersion = "3.0.0"
+ktorClientEngine_z = "3.0.0"
 lifecycleRuntimeKtx = "2.9.1"
 activityCompose = "1.10.1"
 composeBom = "2024.09.00"
+lifecycleViewmodelKtx = "2.9.2"
+moshiKotlin = "1.15.2"
 navigationCompose = "2.9.2"
+postgrestKt = "3.2.2"
+postgrestKtVersion = "1.2.0"
+realtimeKt = "3.2.2"
+firebaseFirestoreKtx = "26.0.0"
 
 [libraries]
 accompanist-systemuicontroller = { module = "com.google.accompanist:accompanist-systemuicontroller", version.ref = "accompanistSystemuicontroller" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 androidx-core-splashscreen = { module = "androidx.core:core-splashscreen", version.ref = "coreSplashscreen" }
+androidx-lifecycle-viewmodel-ktx = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "lifecycleViewmodelKtx" }
 androidx-navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigationCompose" }
+auth-kt = { module = "io.github.jan-tennert.supabase:auth-kt" }
+bom = { module = "io.github.jan-tennert.supabase:bom", version.ref = "bom" }
 coil = { module = "io.coil-kt:coil", version.ref = "coilSvg" }
 coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coilSvg" }
 coil-svg = { module = "io.coil-kt:coil-svg", version.ref = "coilSvg" }
+com-google-firebase-firebase-firestore-ktx = { module = "com.google.firebase:firebase-firestore-ktx" }
+com-google-firebase-firebase-firestore-ktx2 = { module = "com.google.firebase:firebase-firestore-ktx" }
+core = { module = "io.github.jan-tennert.supabase:core", version.ref = "core" }
+firebase-analytics = { module = "com.google.firebase:firebase-analytics" }
+firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebaseBom" }
+firebase-bom-v3272 = { module = "com.google.firebase:firebase-bom", version.ref = "firebaseBomVersion" }
+github-postgrest-kt = { module = "io.github.jan-tennert.supabase:postgrest-kt" }
+github-realtime-kt = { module = "io.github.jan-tennert.supabase:realtime-kt" }
+google-firebase-firestore-ktx = { module = "com.google.firebase:firebase-firestore-ktx" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
@@ -34,6 +60,18 @@ androidx-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-toolin
 androidx-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
 androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
 androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
+ktor-bom = { module = "io.ktor:ktor-bom", version.ref = "ktorBom" }
+ktor-client-android = { module = "io.ktor:ktor-client-android", version.ref = "ktorClientAndroid" }
+ktor-client-android-v300 = { module = "io.ktor:ktor-client-android", version.ref = "ktorClientAndroidVersion" }
+ktor-client-engine_z = { module = "io.ktor:ktor-client-[android]", version.ref = "ktorClientEngine_z" }
+moshi-kotlin = { module = "com.squareup.moshi:moshi-kotlin", version.ref = "moshiKotlin" }
+postgrest-kt = { module = "io.github.jan-tennert.supabase:postgrest-kt" }
+postgrest-kt-v120 = { module = "io.github.jan-tennert.supabase:postgrest-kt", version.ref = "postgrestKtVersion" }
+realtime-kt = { module = "io.github.jan-tennert.supabase:realtime-kt" }
+supabase-auth-kt = { module = "io.github.jan-tennert.supabase:auth-kt" }
+supabase-postgrest-kt = { module = "io.github.jan-tennert.supabase:postgrest-kt", version.ref = "postgrestKt" }
+supabase-realtime-kt = { module = "io.github.jan-tennert.supabase:realtime-kt", version.ref = "realtimeKt" }
+firebase-firestore-ktx = { group = "com.google.firebase", name = "firebase-firestore-ktx", version.ref = "firebaseFirestoreKtx" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

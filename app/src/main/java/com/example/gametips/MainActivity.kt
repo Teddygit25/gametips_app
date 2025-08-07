@@ -24,6 +24,7 @@ import androidx.core.view.WindowInsetsControllerCompat
 import androidx.lifecycle.lifecycleScope
 import com.example.gametips.ui.screens.HomePage
 import com.example.gametips.ui.screens.MainScreen
+import com.example.gametips.ui.screens.TipsPage
 import com.example.gametips.ui.theme.GametipsTheme
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch

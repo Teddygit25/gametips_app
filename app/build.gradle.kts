@@ -2,6 +2,8 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+    id("com.google.gms.google-services")
+
 }
 
 android {
@@ -9,7 +11,7 @@ android {
     compileSdk = 36
 
     defaultConfig {
-        applicationId = "com.example.gametips"
+        applicationId = "com.Teddy.gametips"
         minSdk = 24
         targetSdk = 36
         versionCode = 1
@@ -43,6 +45,15 @@ dependencies {
     implementation(libs.androidx.core.splashscreen)
     implementation(libs.androidx.navigation.compose)
     implementation(libs.accompanist.systemuicontroller)
+    implementation(libs.moshi.kotlin)
+    implementation(libs.androidx.lifecycle.viewmodel.ktx) // Or the latest stable version
+    implementation(libs.firebase.analytics)
+    // BoM (version defined here only)
+    implementation (platform(libs.firebase.bom.v3272))
+// Add Firestore (❌ no version here)
+    implementation (libs.com.google.firebase.firebase.firestore.ktx)
+
+
 
     // For core Coil support
     implementation(libs.coil)
@@ -61,6 +72,7 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+    implementation(libs.com.google.firebase.firebase.firestore.ktx2)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

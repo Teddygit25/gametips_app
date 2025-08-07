@@ -49,6 +49,7 @@ import com.example.gametips.R
 import com.example.gametips.ui.data.models.Coach
 import com.example.gametips.ui.data.models.Game
 import com.example.gametips.ui.data.models.GameCategoryNav
+import com.example.gametips.ui.theme.Purple
 
 
 @Composable
@@ -272,11 +273,13 @@ fun FontFamilyLobster(text : String){
 @Composable
 fun GameCard(
     game: Game ,
+    onClick: () -> Unit ,
     modifier: Modifier = Modifier
 ) {
     Box(
         modifier = modifier
             .height(270.dp)
+            .clickable(onClick = onClick)
             .width(180.dp)
             .padding(8.dp)
             .clip(RoundedCornerShape(16.dp))

@@ -33,7 +33,7 @@ fun MainScreen(){
     val bottomNavItems = listOf(
         BottomNavBar("home" , Icons.Default.Home ) ,
         BottomNavBar(Screen.GetGood.route , iconCustom = painterResource(R.drawable.category) ) ,
-        BottomNavBar("News" , Icons.Default.Place ) ,
+        BottomNavBar("Coaches" , iconCustom = painterResource(R.drawable.contacts_product_24dp_8c1af6_fill0_wght400_grad0_opsz24) ) ,
     )
 
     Scaffold( modifier = Modifier.fillMaxSize()
@@ -49,7 +49,7 @@ fun MainScreen(){
         ) {
             composable("home") { HomePage(innerPadding = paddingValues) }
             composable(Screen.GetGood.route) { CategoriesPage(navController) }
-            composable("News") { CoachesPage() }
+            composable("Coaches") { CoachesPage() }
 
             // NEW: GameList screen with category argument
             composable(
@@ -59,6 +59,14 @@ fun MainScreen(){
                 val category = backStackEntry.arguments?.getString("category") ?: ""
                 GameListPage(category = category , navController)
             }
+            composable(
+                "tips/{tipper}",
+                arguments = listOf(navArgument("tipper") { type = NavType.StringType })
+            ) { backStackEntry ->
+                val tipper = backStackEntry.arguments?.getString("tipper") ?: ""
+                TipsPage(tippers = tipper)
+            }
+
 
         }
     }

@@ -47,8 +47,7 @@ import com.example.gametips.ui.components.FontFamilyLobster
 import com.example.gametips.ui.components.GameCard
 import com.example.gametips.ui.components.Screen
 import com.example.gametips.ui.data.models.Game
-
-
+import com.example.gametips.ui.data.models.GameCategoryNav
 
 
 @Composable
@@ -131,7 +130,7 @@ fun GameListPage(category: String , navController:NavHostController ) {
             modifier = Modifier.fillMaxSize()
         ) {
             items(games) { game ->
-                GameCard(game = game)
+                GameCard(game = game , onClick = { navController.navigate("tips/Mortal Kombat")})
             }
         }
     }

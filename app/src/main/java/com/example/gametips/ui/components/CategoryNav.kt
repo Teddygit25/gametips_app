@@ -2,6 +2,7 @@ package com.example.gametips.ui.components
 
 sealed class Screen(val route: String) {
 
+
     // This is the route for the Get Good category screen
     object GetGood : Screen("Get good")
 
