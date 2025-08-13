@@ -22,9 +22,12 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsControllerCompat
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.gametips.ui.screens.AddTipScreen
 import com.example.gametips.ui.screens.HomePage
 import com.example.gametips.ui.screens.MainScreen
 import com.example.gametips.ui.screens.TipsPage
+import com.example.gametips.ui.screens.TipsViewModel
 import com.example.gametips.ui.theme.GametipsTheme
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -70,6 +73,6 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun GreetingPreview() {
     GametipsTheme {
-        HomePage(innerPadding = PaddingValues())
+        MainScreen()
     }
 }

@@ -88,6 +88,8 @@ fun GameListPage(category: String , navController:NavHostController ) {
     else -> emptyList()
     }
 
+
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -128,8 +130,7 @@ fun GameListPage(category: String , navController:NavHostController ) {
             verticalArrangement = Arrangement.spacedBy(12.dp),
             horizontalArrangement = Arrangement.spacedBy(12.dp),
             modifier = Modifier.fillMaxSize()
-        ) {
-            items(games) { game ->
+        ) {items(games) { game ->
                 GameCard(game = game , onClick = { navController.navigate("tips/Mortal Kombat")})
             }
         }

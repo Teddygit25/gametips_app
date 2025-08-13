@@ -6,5 +6,6 @@ import androidx.compose.ui.graphics.vector.ImageVector
 data class BottomNavBar(
     val route : String ,
     val icon : ImageVector? = null ,
-    val iconCustom : Painter ? = null
+    val iconCustom : Painter ? = null ,
+    val label: String
     )

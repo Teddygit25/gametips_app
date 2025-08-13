@@ -18,13 +18,23 @@ class GamesRepositories:GameService {
             .addOnFailureListener { onResult(emptyList()) }
     }
 
-    override fun addGame(tips: Tips, onComplete: () -> Unit, onError: (Exception) -> Unit) {
+    override fun addGame(tips: Tips, onResult: (Boolean) -> Unit) {
         gamesCollection.add(tips)
             .addOnSuccessListener {
+                onResult(true)
                 Log.d("Firestore" , "Game added with ID: ${it.id}")
             }
             .addOnFailureListener{e ->
+                onResult(false)
                 Log.e("Firestore" , "Error adding game" , e)
             }
+    }
+
+    override fun deleteTip(tipId: String, onResult: (Boolean) -> Unit) {
+        gamesCollection.document(tipId)
+            .delete()
+            .addOnSuccessListener { onResult(true) }
+            .addOnFailureListener { onResult(false) }
+
     }
 }

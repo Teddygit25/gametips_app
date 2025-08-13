@@ -4,6 +4,7 @@ import kotlinx.serialization.Serializable
 
 
 data class Tips(
+    val id : String ="" ,
     val name:String ="",
     val description:String ="",
     val tip1:String ="",

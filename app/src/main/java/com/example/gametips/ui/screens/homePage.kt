@@ -10,6 +10,8 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
@@ -28,20 +30,47 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
 import com.example.gametips.R
 import com.example.gametips.ui.components.BottomFeatureCard
 import com.example.gametips.ui.components.IconTextCard
+import com.example.gametips.ui.components.Screen
 import com.example.gametips.ui.components.TipCardWithOverlay
+import com.example.gametips.ui.data.models.GameCategoryNav
+import com.example.gametips.ui.data.models.HomeNav
 
 @Composable
-fun HomePage(innerPadding : PaddingValues){
+fun HomePage(innerPadding : PaddingValues , navController:NavHostController){
+
+    val categories = listOf(
+        GameCategoryNav(
+            name = "Racing" ,
+            iconRes = painterResource(R.drawable.sport_car)
+        ) ,
+        GameCategoryNav(
+            name = "Sports" ,
+            iconRes = painterResource(R.drawable.balls_sports) ) ,
+        GameCategoryNav(
+            name = "Fighting" ,
+            iconRes = painterResource(R.drawable.swords) ) ,
+        GameCategoryNav(
+            name = "Shooters" ,
+            iconRes = painterResource(R.drawable.gun)) ,
+        GameCategoryNav(
+            name = "RPGs" ,
+            iconRes = painterResource(R.drawable.icons8_elden_ring))
+
+
+
+    )
 
     val searchInput: MutableState<String> = remember {mutableStateOf("")}
 
@@ -95,7 +124,7 @@ fun HomePage(innerPadding : PaddingValues){
                         placeholder = {Text("Search...")},
                         modifier = Modifier
                             .background(Color.Transparent)
-                            .padding(vertical = 10.dp),
+                            .padding(top = 10.dp),
                         colors = TextFieldDefaults.colors(
                             focusedContainerColor = Color.White.copy(alpha = 0.9f),
                             unfocusedContainerColor = Color.Transparent,
@@ -120,14 +149,13 @@ fun HomePage(innerPadding : PaddingValues){
 
         }
 
-        Row(modifier = Modifier.horizontalScroll(rememberScrollState())) {
-            IconTextCard(category = "Racing", image = R.drawable.sport_car)
+        LazyRow(modifier = Modifier.fillMaxWidth()) {
+            items(categories){item ->
+                IconTextCard(category = item , onClick = {navController.navigate(Screen.GameList.createRoute(item.name))})
+            }
 
-            IconTextCard(category = "FPS" , image = R.drawable.gun)
 
-            IconTextCard(category = "Fighting" , image = R.drawable.swords)
-            IconTextCard(category = "RPG" , image = R.drawable.icons8_elden_ring)
-            IconTextCard(category = "Sports" , image = R.drawable.balls_sports)
+
         }
 
         Row(

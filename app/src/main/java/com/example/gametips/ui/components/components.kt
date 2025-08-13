@@ -49,13 +49,14 @@ import com.example.gametips.R
 import com.example.gametips.ui.data.models.Coach
 import com.example.gametips.ui.data.models.Game
 import com.example.gametips.ui.data.models.GameCategoryNav
+import com.example.gametips.ui.data.models.HomeNav
 import com.example.gametips.ui.theme.Purple
 
 
 @Composable
 fun IconTextCard(
-    category:String,
-    image:Int ,
+    category:GameCategoryNav ,
+    onClick: () -> Unit ,
     modifier: Modifier = Modifier
 ){
     Card(
@@ -63,19 +64,24 @@ fun IconTextCard(
             defaultElevation = 12.dp) ,
         modifier = Modifier.padding(vertical = 6.dp , horizontal = 5.dp)
             .clip(RoundedCornerShape(30.dp))
+            .clickable(
+                onClick =onClick
+            )
     ) {
         Row(
             horizontalArrangement = Arrangement.spacedBy(4.dp) ,
             verticalAlignment = Alignment.CenterVertically ,
             modifier = Modifier.padding(8.dp)) {
 
-            Image(
-                painter = painterResource(image),
-                contentDescription = "SVG icons" ,
-                modifier = Modifier.size(28.dp)
-            )
+            category.iconRes?.let {
+                Image(
+                    painter = it,
+                    contentDescription = "SVG icons" ,
+                    modifier = Modifier.size(28.dp)
+                )
+            }
             Text(
-                text = category
+                text = category.name
             )
         }
     }
@@ -241,15 +247,17 @@ fun CategoryCardWithOverlay(
                 style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold)
             )
             Spacer(modifier = Modifier.height(4.dp))
-            Text(
-                text = category.aboutText,
-                color = Color.White.copy(alpha = 0.5f),
-                style = MaterialTheme.typography.bodyMedium,
-                maxLines = 2,
-                overflow = TextOverflow.Ellipsis ,
-                textAlign = TextAlign.Center
+            category.aboutText?.let {
+                Text(
+                    text = it,
+                    color = Color.White.copy(alpha = 0.5f),
+                    style = MaterialTheme.typography.bodyMedium,
+                    maxLines = 2,
+                    overflow = TextOverflow.Ellipsis ,
+                    textAlign = TextAlign.Center
 
-            )
+                )
+            }
         }
     }
 }
@@ -328,12 +336,13 @@ fun GameCard(
 
 
 @Composable
-fun CoachCard(coach: Coach ,onHireClick: () -> Unit) {
+fun CoachCard(coach: Coach ,onHireClick: () -> Unit , onClick: () -> Unit) {
     Card(
         modifier = Modifier
             .padding(8.dp)
             .width(180.dp)
-            .height(240.dp),
+            .height(240.dp)
+            .clickable(onClick = onClick),
         shape = RoundedCornerShape(16.dp),
         elevation = CardDefaults.cardElevation(6.dp)
     ) {

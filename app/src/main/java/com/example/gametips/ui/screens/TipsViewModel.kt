@@ -19,7 +19,7 @@ class TipsViewModel: ViewModel() {
     private val repo = GamesRepositories() // instance of the places repository
     private val db = FirebaseFirestore.getInstance()
     // methods
-    fun getTips(tippers : String)
+    fun getTips(tipper:String)
     {
         repo.getTips {
             _tips.value = it
@@ -29,12 +29,30 @@ class TipsViewModel: ViewModel() {
 
 
 
-    fun addTips(tips: Tips) {
-        repo.addGame(
-            tips,
-            onComplete = {getTips(tippers = "")} ,
-            onError = {e -> e.printStackTrace()}
-        )
+//    fun addTips(tips: Tips) {
+//        repo.addGame(
+//            tips,
+//            onComplete = {getTips(tippers = "")} ,
+//            onError = {e -> e.printStackTrace()}
+//        )
+//    }
+
+    fun addTips(tips: Tips){
+        repo.addGame(tips){success ->
+            if (success){
+                getTips(tipper = "")
+            }else{
+                println("failed to add tip")
+            }
+        }
+    }
+
+    fun deleteTip(tipId: String) {
+        repo.deleteTip(tipId) { success ->
+            if (success) {
+                _tips.value = _tips.value.filterNot { it.id == tipId } // ✅ instantly update UI
+            }
+        }
     }
 
 
